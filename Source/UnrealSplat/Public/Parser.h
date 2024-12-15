@@ -62,6 +62,6 @@ class UNREALSPLAT_API UParser : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category = "JI20/Parser")
-	static FString ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutInfoMessage, TArray<FGaussianSplatData>& GaussianSplatData);
+	static TArray<FGaussianSplatData> ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString);
 
 };
