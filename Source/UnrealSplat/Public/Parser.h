@@ -6,6 +6,25 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Parser.generated.h"
 
+USTRUCT(BlueprintType)
+struct FHighOrderHarmonicsCoefficientsStruct {
+
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FVector> Values;
+
+	bool operator==(const FHighOrderHarmonicsCoefficientsStruct& Other) const
+	{
+		return Values == Other.Values;
+	}
+
+	FHighOrderHarmonicsCoefficientsStruct()
+		: Values()
+	{
+	}
+};
+
 /**
  * Represents parsed data for a single splat, loaded from a regular PLY file.
  */
@@ -17,38 +36,49 @@ struct FGaussianSplatData
 
 	// Splat position (x, y, z)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector Position;
+	TArray<FVector> Positions;
 
 	// Normal vectors [optional] (nx, ny, nz)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector Normal;
+	TArray<FVector> Normals;
 
 	// Splat orientation coming as wxyz from PLY (rot_0, rot_1, rot_2, rot_3)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FQuat Orientation;
+	TArray<FQuat> Orientations;
 
 	// Splat scale (scale_0, scale_1, scale_2)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector Scale;
+	TArray<FVector> Scales;
 
 	// Splat opacity (opacity)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Opacity;
+	TArray<float> Opacity;
 
 	// Spherical Harmonics coefficients - Zero order (f_dc_0, f_dc_1, f_dc_2)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector ZeroOrderHarmonicsCoefficients;
+	TArray<FVector> ZeroOrderHarmonicsCoefficients;
 
 	// Spherical Harmonics coefficients - High order (f_rest_0, ..., f_rest_44)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FVector> HighOrderHarmonicsCoefficients;
+	TArray<FHighOrderHarmonicsCoefficientsStruct> HighOrderHarmonicsCoefficients;
+
+	bool operator==(const FGaussianSplatData& Other) const
+	{
+		return Positions == Other.Positions
+			&& Normals == Other.Normals
+			&& Orientations == Other.Orientations
+			&& Scales == Other.Scales
+			&& Opacity == Other.Opacity
+			&& ZeroOrderHarmonicsCoefficients == Other.ZeroOrderHarmonicsCoefficients
+			&& HighOrderHarmonicsCoefficients == Other.HighOrderHarmonicsCoefficients;
+	}
 
 	FGaussianSplatData()
-		: Position(FVector::ZeroVector)
-		, Normal(FVector::ZeroVector)
-		, Orientation(FQuat::Identity)
-		, Scale(FVector::OneVector)
-		, Opacity(0)
+		: Positions()
+		, Normals()
+		, Orientations()
+		, Scales()
+		, Opacity()
 	{
 	}
 };
@@ -60,8 +90,9 @@ UCLASS()
 class UNREALSPLAT_API UParser : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "JI20/Parser")
-	static TArray<FGaussianSplatData> ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString);
+	static FGaussianSplatData ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString);
 
 };

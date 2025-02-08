@@ -24,7 +24,7 @@ const char* kPropertyTypes[] = {
   "double",
 };
 
-TArray<FGaussianSplatData> UParser::ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString) {
+FGaussianSplatData UParser::ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString) {
 	
 	// ---- Preparation ----
 
@@ -32,7 +32,7 @@ TArray<FGaussianSplatData> UParser::ParseFilePLY(FString FilePath, bool& bOutSuc
 	FString Output = "---- Parsing PLY File ----\n\n";
 	TMap<FString, float*> vertexData;
 	uint32_t numVertices = 0;
-	TArray<FGaussianSplatData> splats;
+	FGaussianSplatData SplatData;
 
 	// ---- PLY Parsing ----
 	
@@ -41,7 +41,7 @@ TArray<FGaussianSplatData> UParser::ParseFilePLY(FString FilePath, bool& bOutSuc
 	if (!reader.valid()) {
 		bOutSuccess = false;
 		OutputString = FString::Printf(TEXT("Parsing PLY failed - Not a valid PLY file - %s"), *AbsolutePath);
-		return splats;
+		return SplatData;
 	}
 	
 	FString HeaderLog = FString::Printf(TEXT("ply\nformat %s %d.%d\n"), ANSI_TO_TCHAR(kFileTypes[int(reader.file_type())]),
@@ -118,38 +118,35 @@ TArray<FGaussianSplatData> UParser::ParseFilePLY(FString FilePath, bool& bOutSuc
 	}
 
 	for (uint32_t i = 0; i < numVertices; i++) {
-		FGaussianSplatData splat;
 		if (PositionExists) {
-			splat.Position = FVector(vertexData["x"][i], vertexData["y"][i], vertexData["z"][i]);
+			SplatData.Positions.Add(FVector(vertexData["x"][i], vertexData["y"][i], vertexData["z"][i]));
 		}
 		if (NormalExists) {
-			splat.Normal = FVector(vertexData["nx"][i], vertexData["ny"][i], vertexData["nz"][i]);
+			SplatData.Normals.Add(FVector(vertexData["nx"][i], vertexData["ny"][i], vertexData["nz"][i]));
 		}
 		if (OrientationExists) {
-			splat.Orientation = FQuat(vertexData["rot_0"][i], vertexData["rot_1"][i], vertexData["rot_2"][i], vertexData["rot_3"][i]);
+			SplatData.Orientations.Add(FQuat(vertexData["rot_0"][i], vertexData["rot_1"][i], vertexData["rot_2"][i], vertexData["rot_3"][i]));
 		}
 		if (ScaleExists) {
-			splat.Scale = FVector(vertexData["scale_0"][i], vertexData["scale_1"][i], vertexData["scale_2"][i]);
+			SplatData.Scales.Add(FVector(vertexData["scale_0"][i], vertexData["scale_1"][i], vertexData["scale_2"][i]));
 		}
 		if (OpacityExists) {
-			splat.Opacity = vertexData["opacity"][i];
+			SplatData.Opacity.Add(vertexData["opacity"][i]);
 		}
 		if (ZeroOrderHarmonicsExists) {
-			splat.ZeroOrderHarmonicsCoefficients = FVector(vertexData["f_dc_0"][i], vertexData["f_dc_1"][i], vertexData["f_dc_2"][i]);
+			SplatData.ZeroOrderHarmonicsCoefficients.Add(FVector(vertexData["f_dc_0"][i], vertexData["f_dc_1"][i], vertexData["f_dc_2"][i]));
 		}
 		if (higherOrderHarmonicsExists) {
-			TArray<FVector> higherOrderHarmonics;
+			FHighOrderHarmonicsCoefficientsStruct higherOrderHarmonics;
 			for (uint32_t y = 0; y < 45; y += 3) {
 				FString index1 = "f_rest_" + FString::FromInt(y);
 				FString index2 = "f_rest_" + FString::FromInt(y+1);
 				FString index3 = "f_rest_" + FString::FromInt(y+2);
 
-				higherOrderHarmonics.Add(FVector(vertexData[index1][i], vertexData[index2][i], vertexData[index3][i]));
+				higherOrderHarmonics.Values.Add(FVector(vertexData[index1][i], vertexData[index2][i], vertexData[index3][i]));
 			}
-			splat.HighOrderHarmonicsCoefficients = higherOrderHarmonics;
+			SplatData.HighOrderHarmonicsCoefficients.Add(higherOrderHarmonics);
 		}
-
-		splats.Add(splat);
 	}
 
 	// ---- Finishing up ----
@@ -165,6 +162,6 @@ TArray<FGaussianSplatData> UParser::ParseFilePLY(FString FilePath, bool& bOutSuc
 	Output += "---- Finished Parsing PLY File ----";
 	OutputString = Output;
 
-	return splats;
+	return SplatData;
 }
 
