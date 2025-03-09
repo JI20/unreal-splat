@@ -95,4 +95,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "JI20/Parser")
 	static FGaussianSplatData ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString);
 
+	UFUNCTION(BlueprintCallable, Category = "JI20/Parser")
+	static TArray<FLinearColor> SH2RGB(TArray<FVector> ZeroOrderHarmonics, TArray<FHighOrderHarmonicsCoefficientsStruct> HigherOrderHarmonics);
 };

@@ -24,6 +24,8 @@ const char* kPropertyTypes[] = {
   "double",
 };
 
+const float C0 = 0.28209479177387814;
+
 FGaussianSplatData UParser::ParseFilePLY(FString FilePath, bool& bOutSuccess, FString& OutputString) {
 	
 	// ---- Preparation ----
@@ -164,4 +166,14 @@ FGaussianSplatData UParser::ParseFilePLY(FString FilePath, bool& bOutSuccess, FS
 
 	return SplatData;
 }
+
+TArray<FLinearColor> UParser::SH2RGB(TArray<FVector> ZeroOrderHarmonics, TArray<FHighOrderHarmonicsCoefficientsStruct> HigherOrderHarmonics) {
+	TArray<FLinearColor> result;
+	for (int i = 0; i < ZeroOrderHarmonics.Num(); i++) {
+		FLinearColor col = FLinearColor(0.5 + C0 * ZeroOrderHarmonics[i].X, 0.5 + C0 * ZeroOrderHarmonics[i].Y, 0.5 + C0 * ZeroOrderHarmonics[i].Z);
+		result.Add(col);
+	}
+	return result;
+}
+
 
