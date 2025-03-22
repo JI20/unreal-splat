@@ -127,13 +127,15 @@ FGaussianSplatData UParser::ParseFilePLY(FString FilePath, bool& bOutSuccess, FS
 			SplatData.Normals.Add(FVector(vertexData["nx"][i], vertexData["ny"][i], vertexData["nz"][i]));
 		}
 		if (OrientationExists) {
-			SplatData.Orientations.Add(FQuat(vertexData["rot_0"][i], vertexData["rot_1"][i], vertexData["rot_2"][i], vertexData["rot_3"][i]));
+			FQuat Rot = FQuat(vertexData["rot_0"][i], vertexData["rot_1"][i], vertexData["rot_2"][i], vertexData["rot_3"][i]); // Normalize Quaternion
+			Rot.Normalize();
+			SplatData.Orientations.Add(Rot);
 		}
 		if (ScaleExists) {
-			SplatData.Scales.Add(FVector(vertexData["scale_0"][i], vertexData["scale_1"][i], vertexData["scale_2"][i]));
+			SplatData.Scales.Add(FVector(exp(vertexData["scale_0"][i]), exp(vertexData["scale_1"][i]), exp(vertexData["scale_2"][i]))); // Apply Exponential Function
 		}
 		if (OpacityExists) {
-			SplatData.Opacity.Add(vertexData["opacity"][i]);
+			SplatData.Opacity.Add(1.0/1.0 + exp(-vertexData["opacity"][i])); // Apply Sigmoid Function
 		}
 		if (ZeroOrderHarmonicsExists) {
 			SplatData.ZeroOrderHarmonicsCoefficients.Add(FVector(vertexData["f_dc_0"][i], vertexData["f_dc_1"][i], vertexData["f_dc_2"][i]));
