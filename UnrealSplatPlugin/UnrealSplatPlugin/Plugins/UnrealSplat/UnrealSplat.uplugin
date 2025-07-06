@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "UnrealSplat",
+	"Description": "Renderer for 3D Gaussian Splatting in Unreal Engine",
+	"Category": "Other",
+	"CreatedBy": "Jonas Itt",
+	"CreatedByURL": "www.github.com/ji20",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "UnrealSplat",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
