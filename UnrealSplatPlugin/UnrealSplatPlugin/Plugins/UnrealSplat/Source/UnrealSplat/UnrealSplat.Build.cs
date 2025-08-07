@@ -17,7 +17,7 @@ public class UnrealSplat : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				// ... add other private include paths required here ...
+				"UnrealSplat",
 			}
 			);
 			
@@ -38,13 +38,14 @@ public class UnrealSplat : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-                "InputCore", 
-				"EnhancedInput", 
+                "InputCore",
+                "EnhancedInput", 
 				"Niagara",
                 "UnrealEd",
                 "ToolMenus",
                 "Blutility",
                 "UMG",
+				"UMGEditor",
                 "EditorScriptingUtilities",
 				"ContentBrowser",
                 "AssetRegistry", // Also typically needed if you're interacting with Content Browser

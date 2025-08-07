@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Parser.generated.h"
 
+
 USTRUCT(BlueprintType)
 struct FHighOrderHarmonicsCoefficientsStruct {
 
