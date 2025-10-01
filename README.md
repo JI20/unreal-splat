@@ -12,7 +12,8 @@ Example Screenshot from within the Unreal Engine's Editor using this Plugin. The
 
 ---
 
-## ✅ WHat can the Plugin Do?
+## ✅ What can the Plugin Do?
+The Plugin is still in relatively early development.
 
 * **Niagara-Powered Rendering**: Utilizes Unreal Engine's Niagara system for rendering, ensuring high performance and integration with the engine's VFX pipeline.
 * **Large Model Support**: Efficiently renders models with up to 2 million splats.
