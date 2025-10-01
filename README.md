@@ -72,7 +72,8 @@ This Project was developed as part of my working student job at the Chair of Com
 
 ## 📬 Contact
 
-Project Link: [https://github.com/your-username/your-repo-name](https://github.com/your-username/your-repo-name)
+Jonas Itt: [https://github.com/JI20](https://github.com/JI20)
+Chair of Computer Graphics and Visualization, Technical University of Munich: [https://www.cs.cit.tum.de/cg/cover-page/](https://www.cs.cit.tum.de/cg/cover-page/)
 
 ## 🙏 Acknowledgments
 
