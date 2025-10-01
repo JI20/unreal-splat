@@ -1,0 +1,73 @@
+# UnrealSplat - 3D Gaussian Splatting for Unreal Engine
+
+![Unreal Engine Version](https://img.shields.io/badge/Unreal%20Engine-5.5-purple.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%2064--bit-blue.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)
+
+UnrealSplat is a plugin for Unreal Engine 5.5 that enables high-performance, real-time rendering of 3D Gaussian Splatting models. It leverages Unreal's built-in Niagara system to render scenes with millions of splats efficiently.
+
+
+
+---
+
+## ✅ WHat can the Plugin Do?
+
+* **Niagara-Powered Rendering**: Utilizes Unreal Engine's Niagara system for rendering, ensuring high performance and integration with the engine's VFX pipeline.
+* **Large Model Support**: Efficiently renders models with up to 2 million splats.
+* **Texture-Based Splat Storage**: Splat properties are stored in textures and loaded on-demand by Niagara for optimal memory and performance.
+* **High Performance**: Designed for real-time applications, including VR and interactive walkthroughs.
+* **Simple UI**: A straightforward user interface for quick and easy model loading.
+
+---
+
+## 🚧 Current Limitations & Known Issues
+
+This plugin is currently in active development. Please be aware of the following limitations:
+
+* **Transformations**: Moving, rotating, or scaling the splat actor in the world is not fully supported. While the actor can be moved, the rendering may break.
+* **Spherical Harmonics (SH)**: Support for spherical harmonics is a work-in-progress (WIP) and is currently disabled.
+* **Model Size**: Models significantly larger than 2 million splats may not render correctly.
+* **File Format**: Only `.ply` files from standard Gaussian Splatting training outputs are currently supported.
+
+---
+
+## 🔧 Installation
+
+1.  **Clone the plugin into the Plugins Folder of your Unreal Project**. Itincludes pre-compiled binaries for **Windows 64-bit**.
+2.  **Restart your project.** The plugin should be enabled automatically (You might need to rebuild the plugin from your Projects Visual Studio Environment). You can verify this under **Edit > Plugins**.
+
+---
+
+## 🚀 How to Use
+
+1.  **Place Your Model**: Copy your `.ply` model file somewhere inside your project's `Content/Models` folder (e.g., `Content/Models/my_model.ply`).
+2.  **Open the UnrealSplat UI**: A new button named **"UnrealSplat"** will appear on the main toolbar in the editor. Click it to open the loading UI.
+3.  **Enter the File Path**: The UI will prompt you for a string. Enter the path to your model **relative to the project's `Content/Models` folder**.
+    * For example, if your model is at `[YourProject]/Content/Models/my_model.ply`, you would enter:
+        ```
+        my_model.ply
+        ```
+4.  **Load Model**: Press the Render button in the UI. The plugin will create the necessary assets and spawn an actor in your scene to render the model.
+
+
+
+---
+
+## 🤝 How to Contribute
+
+This is an open-source project and contributions are welcome! If you want to help fix a known issue or add a new feature, please follow the standard GitHub Fork & Pull Request workflow. For bugs or suggestions, please open an issue.
+
+---
+
+## 📜 License
+
+This project is distributed under the MIT License. See the `LICENSE` file for more information.
+
+This Project was developed as part of my working student job at the Chair of Computer Graphics and Visualization at the Technical University of Munich.
+
+---
+
+## 📬 Contact
+
+Project Link: [https://github.com/your-username/your-repo-name](https://github.com/your-username/your-repo-name)
