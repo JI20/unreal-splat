@@ -5,9 +5,10 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)
 
-UnrealSplat is a plugin for Unreal Engine 5.5 that enables high-performance, real-time rendering of 3D Gaussian Splatting models. It leverages Unreal's built-in Niagara system to render scenes with millions of splats efficiently.
+UnrealSplat is a plugin for Unreal Engine 5.5 that enables high-performance, real-time rendering of 3D Gaussian Splatting models. It leverages Unreal's built-in Niagara system to render scenes with up to 2 million splats efficiently.
 
-
+<img width="1101" height="977" alt="image" src="https://github.com/user-attachments/assets/3c1dbbb9-1692-40de-8886-48eea588dbd3" />
+Example Screenshot from within the Unreal Engine's Editor using this Plugin. The 3DGS Model is from https://jonbarron.info/mipnerf360/.
 
 ---
 
