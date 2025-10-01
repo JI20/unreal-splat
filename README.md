@@ -71,3 +71,19 @@ This Project was developed as part of my working student job at the Chair of Com
 ## 📬 Contact
 
 Project Link: [https://github.com/your-username/your-repo-name](https://github.com/your-username/your-repo-name)
+
+## 🙏 Acknowledgments
+
+This project was made possible thanks to the pioneering work of others in the community. The development of this plugin was heavily inspired by, and adapts code from, the following incredible projects.
+
+* **Original 3D Gaussian Splatting Paper**
+    * Kerbel, B., Kopanas, G., Martin-Brualla, R., & Drettakis, G. (2023). *3D Gaussian Splatting for Real-Time Radiance Field Rendering*.
+    * [Project Page](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)
+
+* **XScene-UEPlugin by xverse-engine** (Apache 2.0 License)
+    * This project provided a foundational understanding of integrating advanced rendering techniques into Unreal Engine. Some code and general UX patterns were adapted from here.
+    * [GitHub Repository](https://github.com/xverse-engine/XScene-UEPlugin)
+
+* **GaussianSplattingForUnrealEngine by Italink** (MIT License)
+    * This repository served as a key reference for the implementation of the core Gaussian Splatting rendering logic.
+    * [GitHub Repository](https://github.com/Italink/GaussianSplattingForUnrealEngine)
